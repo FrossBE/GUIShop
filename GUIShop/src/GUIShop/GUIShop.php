@@ -91,14 +91,14 @@ class GUIShop extends PluginBase
     $name = $player->getName ();
     $item = $this->pldb [strtolower($name)] ["상점물품"];
     $message = $this->pldb [strtolower($name)] ["상점이름"];
-    $coin = $this->shopdb ["구매"] [$message] [$item] ["가격"];
+    $money = (int)$this->shopdb ["구매"] [$message] [$item] ["가격"];
     $encode = [
       'type' => 'custom_form',
       'title' => '§l§6[ §f구매 상점 §6]',
       'content' => [
         [
           'type' => 'input',
-          'text' => "§r§7구매하실 갯수를 적어주세요.\n개당 {$coin}-코인"
+          'text' => "§r§7구매하실 갯수를 적어주세요.\n개당 {$money}-코인"
         ]
       ]
     ];
@@ -125,14 +125,14 @@ class GUIShop extends PluginBase
     $name = $player->getName ();
     $item = $this->pldb [strtolower($name)] ["상점물품"];
     $message = $this->pldb [strtolower($name)] ["상점이름"];
-    $coin = $this->shopdb ["판매"] [$message] [$item] ["가격"];
+    $money = (int)$this->shopdb ["판매"] [$message] [$item] ["가격"];
     $encode = [
       'type' => 'custom_form',
       'title' => '§l§6[ §f판매 상점 §6]',
       'content' => [
         [
           'type' => 'input',
-          'text' => "§r§7판매하실 갯수를 적어주세요.\n개당 {$coin}-코인"
+          'text' => "§r§7판매하실 갯수를 적어주세요.\n개당 {$money}-코인"
         ]
       ]
     ];
