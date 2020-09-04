@@ -168,7 +168,7 @@ class GUIShop extends PluginBase
     $inv->setItem( 19 , Item::get(54, 0, 1)->setCustomName("§r§f구매상점으로 이동")->setLore([ "§r§7구매상점으로 이동합니다.\n인벤토리로 가져가보세요." ]) );
     $inv->setItem( 20 , $CheckItem );
     $inv->setItem( 21 , $CheckItem );
-    $inv->setItem( 22, Item::get(332, 0, 1)->setCustomName("§r§f나가기")->setLore([ "§r§7상점에서 나갑니다.\n인벤토리로 가져가보세요." ]));
+    $inv->setItem( 22, Item::get(324, 0, 1)->setCustomName("§r§f나가기")->setLore([ "§r§7상점에서 나갑니다.\n인벤토리로 가져가보세요." ]));
     $inv->setItem( 23 , $CheckItem );
     $inv->setItem( 24 , $CheckItem );
     $inv->setItem( 25 , Item::get(266, 0, 1)->setCustomName("§r§f판매상점으로 이동")->setLore([ "§r§7판매상점으로 이동합니다.\n인벤토리로 가져가보세요." ]) );
