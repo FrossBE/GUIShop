@@ -585,8 +585,9 @@ class EventListener implements Listener
       }
       if ($id === 345658) {
         if ($data === 0) {
-          $shopitem = $this->plugin->pldb [strtolower($name)] ["상점물품"];
-          $money = $this->plugin->shopdb ["구매"] [(string)$shopitem] ["가격"];
+          $shopname = $this->plugin->pldb [strtolower($name)] ["상점이름"];
+          $shoppos = $this->plugin->pldb [strtolower($name)] ["상점물품"];
+          $money = $this->plugin->shopdb ["구매"] [$shopname] [$shoppos] ["가격"];
           if ($money == 0){
             $player->sendMessage ($tag . "해당 물품은 이용이 막혀있는 물품입니다.");
             $this->plugin->pldb [strtolower($name)] ["상점정보"] = "없음";
@@ -646,8 +647,9 @@ class EventListener implements Listener
       }
       if ($id === 345659) {
         if ($data === 0) {
-          $shopitem = $this->plugin->pldb [strtolower($name)] ["상점물품"];
-          $money = $this->plugin->shopdb ["판매"] [(string)$shopitem] ["가격"];
+          $shopname = $this->plugin->pldb [strtolower($name)] ["상점이름"];
+          $shoppos = $this->plugin->pldb [strtolower($name)] ["상점물품"];
+          $money = $this->plugin->shopdb ["판매"] [$shopname] [$shoppos] ["가격"];
           if ($money == 0){
             $player->sendMessage ($tag . "해당 물품은 이용이 막혀있는 물품입니다.");
             $this->plugin->pldb [strtolower($name)] ["상점정보"] = "없음";
@@ -730,8 +732,9 @@ class EventListener implements Listener
   public function SayCoin(Player $player)
   {
     $name = $player->getName ();
-    $shopname = $this->plugin->pldb [strtolower($name)] ["상점물품"];
-    $coin = $this->plugin->shopdb ["구매"] [$shopname] ["가격"];
+    $shopname = $this->plugin->pldb [strtolower($name)] ["상점이름"];
+    $shoppos = $this->plugin->pldb [strtolower($name)] ["상점물품"];
+    $coin = $this->plugin->shopdb ["구매"] [$shopname] [$shoppos] ["가격"];
     $count = $this->plugin->pldb [strtolower($name)] ["상점갯수"];
     $money = (int)$coin*(int)$count;
     $encode = [
@@ -757,7 +760,8 @@ class EventListener implements Listener
   {
     $name = $player->getName ();
     $shopname = $this->plugin->pldb [strtolower($name)] ["상점물품"];
-    $coin = $this->plugin->shopdb ["판매"] [$shopname] ["가격"];
+    $shoppos = $this->plugin->pldb [strtolower($name)] ["상점물품"];
+    $coin = $this->plugin->shopdb ["판매"] [$shopname] [$shoppos] ["가격"];
     $count = $this->plugin->pldb [strtolower($name)] ["상점갯수"];
     $money = (int)$coin*(int)$count;
     $encode = [
