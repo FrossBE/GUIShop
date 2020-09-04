@@ -411,14 +411,14 @@ class EventListener implements Listener
                   if ($this->plugin->pldb [strtolower($name)] ["상점수정"] == "온"){
                     $event->setCancelled ();
                     $inv->onClose ($player);
-                    $this->plugin->pldb [strtolower($name)] ["상점물품"] = $shopitem;
+                    $this->plugin->pldb [strtolower($name)] ["상점물품"] = $NPCShop;
                     $this->plugin->save ();
                     $this->ItemNew ($player);
                     return true;
                   }
                   $event->setCancelled ();
                   $inv->onClose ($player);
-                  $this->plugin->pldb [strtolower($name)] ["상점물품"] = $shopitem;
+                  $this->plugin->pldb [strtolower($name)] ["상점물품"] = $NPCShop;
                   $this->plugin->save ();
                 }
               }
@@ -437,14 +437,14 @@ class EventListener implements Listener
                   if ($this->plugin->pldb [strtolower($name)] ["상점수정"] == "온"){
                     $event->setCancelled ();
                     $inv->onClose ($player);
-                    $this->plugin->pldb [strtolower($name)] ["상점물품"] = $shopitem;
+                    $this->plugin->pldb [strtolower($name)] ["상점물품"] = $NPCShop;
                     $this->plugin->save ();
                     $this->ItemNew ($player);
                     return true;
                   }
                   $event->setCancelled ();
                   $inv->onClose ($player);
-                  $this->plugin->pldb [strtolower($name)] ["상점물품"] = $shopitem;
+                  $this->plugin->pldb [strtolower($name)] ["상점물품"] = $NPCShop;
                   $this->plugin->save ();
                 }
               }
