@@ -84,7 +84,7 @@ class GUIShop extends PluginBase
       public function onRun($currentTick) {
         $this->owner->SayManagerUI($this->player);
       }
-    }, 5);
+    }, 10);
   }
   public function SayManagerUI(Player $player)
   {
@@ -118,7 +118,7 @@ class GUIShop extends PluginBase
       public function onRun($currentTick) {
         $this->owner->PayManagerUI($this->player);
       }
-    }, 5);
+    }, 10);
   }
   public function PayManagerUI(Player $player)
   {
@@ -182,7 +182,7 @@ class GUIShop extends PluginBase
       public function onRun($currentTick) {
         $this->player->addWindow($this->inv);
       }
-    }, 5);
+    }, 10);
   }
   public function onSayOpen($player) {
     $name = $player->getName ();
@@ -224,7 +224,7 @@ class GUIShop extends PluginBase
       public function onRun($currentTick) {
         $this->player->addWindow($this->inv);
       }
-    }, 5);
+    }, 10);
   }
   public function onSellOpen($player) {
     $name = $player->getName ();
@@ -266,7 +266,7 @@ class GUIShop extends PluginBase
       public function onRun($currentTick) {
         $this->player->addWindow($this->inv);
       }
-    }, 5);
+    }, 10);
   }
   public function SayShopOpen($player, $message) {
     $name = $player->getName ();
@@ -291,7 +291,7 @@ class GUIShop extends PluginBase
       public function onRun($currentTick) {
         $this->player->addWindow($this->inv);
       }
-    }, 5);
+    }, 10);
   }
   public function SellShopOpen($player, $message) {
     $name = $player->getName ();
@@ -316,7 +316,7 @@ class GUIShop extends PluginBase
       public function onRun($currentTick) {
         $this->player->addWindow($this->inv);
       }
-    }, 5);
+    }, 10);
   }
 
   public function ShopItemsSet($player) {
@@ -360,7 +360,7 @@ class GUIShop extends PluginBase
       public function onRun($currentTick) {
         $this->player->addWindow($this->inv);
       }
-    }, 5);
+    }, 10);
   }
 
   public function ShopItemPosSet($player) {
@@ -404,7 +404,7 @@ class GUIShop extends PluginBase
       public function onRun($currentTick) {
         $this->player->addWindow($this->inv);
       }
-    }, 5);
+    }, 10);
   }
 
   public function getSayLists() : array{
