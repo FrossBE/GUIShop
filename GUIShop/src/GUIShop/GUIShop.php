@@ -279,7 +279,9 @@ class GUIShop extends PluginBase
         $money = $this->shopdb ["구매"] [$message] [$NPCShop] ["아이템"];
         $item = Item::jsonDeserialize ($s);
         $item->setCount(1);
-        $item->setLore([ "§r§7구매 가격 : {$money}\n구매를 진행하려면 인벤토리로 가져가보세요." ]);
+        $lore = [];
+        $lore [] = "§r§7구매 가격 : {$money}\n구매를 진행하려면 인벤토리로 가져가보세요.";
+        $item->setLore ($lore);
         $inv->setItem( $i , $item );
         ++$i;
       }
@@ -306,7 +308,9 @@ class GUIShop extends PluginBase
         $money = $this->shopdb ["판매"] [$message] [$NPCShop] ["가격"];
         $item = Item::jsonDeserialize ($s);
         $item->setCount(1);
-        $item->setLore([ "§r§7판매 가격 : {$money}\n판매를 진행하려면 인벤토리로 가져가보세요." ]);
+        $lore = [];
+        $lore [] = "§r§7판매 가격 : {$money}\n판매를 진행하려면 인벤토리로 가져가보세요.";
+        $item->setLore ($lore);
         $inv->setItem( $i , $item );
         ++$i;
       }
