@@ -276,7 +276,7 @@ class GUIShop extends PluginBase
     if (isset($this->shopdb ["구매"])){
       foreach($this->shopdb ["구매"] [$message] as $NPCShop => $v){
         $s = $this->shopdb ["구매"] [$message] [$NPCShop] ["아이템"];
-        $money = $this->shopdb ["구매"] [$message] [$NPCShop] ["아이템"];
+        $money = $this->shopdb ["구매"] [$message] [$NPCShop] ["가격"];
         $item = Item::jsonDeserialize ($s);
         $item->setCount(1);
         $lore = [];
