@@ -407,21 +407,6 @@ class GUIShop extends PluginBase
     }, 10);
   }
 
-  public function getSayLists() : array{
-    $arr = [];
-    foreach($this->shopdb ["구매"] as $NPCShop => $v){
-      array_push($arr, $NPCShop);
-    }
-    return $arr;
-  }
-  public function getPayLists() : array{
-    $arr = [];
-    foreach($this->shopdb ["판매"] as $NPCShop => $v){
-      array_push($arr, $NPCShop);
-    }
-    return $arr;
-  }
-
   public function onDisable()
   {
     $this->save();
