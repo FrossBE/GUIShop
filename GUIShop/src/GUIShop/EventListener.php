@@ -29,6 +29,8 @@ use pocketmine\event\inventory\InventoryCloseEvent;
 use pocketmine\inventory\ContainerInventory;
 use pocketmine\network\mcpe\protocol\ContainerClosePacket;
 
+use pocketmine\network\mcpe\protocol\types\inventory\UseItemOnEntityTransactionData;
+
 class EventListener implements Listener
 {
 
@@ -177,10 +179,10 @@ class EventListener implements Listener
               if ($this->plugin->pldb [strtolower($name)] ["상점정보"] == "구매"){
                 $item = $player->getInventory()->getItemInHand();
                 $itemname = $item->getName ();
-                $nbt = $item->jsonSerialize ();
-                $item->setCount(1);
-                $this->plugin->shopdb ["구매"] ["블럭상점"] [$item->getName ()] ["아이템"] = $nbt;
-                $this->plugin->shopdb ["구매"] ["블럭상점"] [$item->getName ()] ["가격"] = 0;
+                $this->plugin->shopdb ["구매"] ["블럭상점"] [$itemname] ['id'] = $item->getId();
+                $this->plugin->shopdb ["구매"] ["블럭상점"] [$itemname] ['dmg'] = $item->getDamage();
+                $this->plugin->shopdb ["구매"] ["블럭상점"] [$itemname] ['nbt'] = $item->hasCompoundTag() ? base64_encode($item->getCompoundTag()) : '';
+                $this->plugin->shopdb ["구매"] ["블럭상점"] [$itemname] ["가격"] = 0;
                 $this->plugin->save ();
                 $event->setCancelled ();
                 $inv->onClose($player);
@@ -189,10 +191,10 @@ class EventListener implements Listener
               if ($this->plugin->pldb [strtolower($name)] ["상점정보"] == "판매"){
                 $item = $player->getInventory()->getItemInHand();
                 $itemname = $item->getName ();
-                $nbt = $item->jsonSerialize ();
-                $item->setCount(1);
-                $this->plugin->shopdb ["판매"] ["블럭상점"] [$item->getName ()] ["아이템"] = $nbt;
-                $this->plugin->shopdb ["판매"] ["블럭상점"] [$item->getName ()] ["가격"] = 0;
+                $this->plugin->shopdb ["판매"] ["블럭상점"] [$itemname] ['id'] = $item->getId();
+                $this->plugin->shopdb ["판매"] ["블럭상점"] [$itemname] ['dmg'] = $item->getDamage();
+                $this->plugin->shopdb ["판매"] ["블럭상점"] [$itemname] ['nbt'] = $item->hasCompoundTag() ? base64_encode($item->getCompoundTag()) : '';
+                $this->plugin->shopdb ["판매"] ["블럭상점"] [$itemname] ["가격"] = 0;
                 $this->plugin->save ();
                 $event->setCancelled ();
                 $inv->onClose($player);
@@ -244,10 +246,11 @@ class EventListener implements Listener
             if ($this->plugin->pldb [strtolower($name)] ["상점생성"] == "온"){
               if ($this->plugin->pldb [strtolower($name)] ["상점정보"] == "구매"){
                 $item = $player->getInventory()->getItemInHand();
-                $nbt = $item->jsonSerialize ();
-                $item->setCount(1);
-                $this->plugin->shopdb ["구매"] ["도구상점"] [$item->getName ()] ["아이템"] = $nbt;
-                $this->plugin->shopdb ["구매"] ["도구상점"] [$item->getName ()] ["가격"] = 0;
+                $itemname = $item->getName ();
+                $this->plugin->shopdb ["구매"] ["도구상점"] [$itemname] ['id'] = $item->getId();
+                $this->plugin->shopdb ["구매"] ["도구상점"] [$itemname] ['dmg'] = $item->getDamage();
+                $this->plugin->shopdb ["구매"] ["도구상점"] [$itemname] ['nbt'] = $item->hasCompoundTag() ? base64_encode($item->getCompoundTag()) : '';
+                $this->plugin->shopdb ["구매"] ["도구상점"] [$itemname] ["가격"] = 0;
                 $this->plugin->save ();
                 $event->setCancelled ();
                 $inv->onClose($player);
@@ -255,10 +258,11 @@ class EventListener implements Listener
               }
               if ($this->plugin->pldb [strtolower($name)] ["상점정보"] == "판매"){
                 $item = $player->getInventory()->getItemInHand();
-                $nbt = $item->jsonSerialize ();
-                $item->setCount(1);
-                $this->plugin->shopdb ["판매"] ["도구상점"] [$item->getName ()] ["아이템"] = $nbt;
-                $this->plugin->shopdb ["판매"] ["도구상점"] [$item->getName ()] ["가격"] = 0;
+                $itemname = $item->getName ();
+                $this->plugin->shopdb ["판매"] ["도구상점"] [$itemname] ['id'] = $item->getId();
+                $this->plugin->shopdb ["판매"] ["도구상점"] [$itemname] ['dmg'] = $item->getDamage();
+                $this->plugin->shopdb ["판매"] ["도구상점"] [$itemname] ['nbt'] = $item->hasCompoundTag() ? base64_encode($item->getCompoundTag()) : '';
+                $this->plugin->shopdb ["판매"] ["도구상점"] [$itemname] ["가격"] = 0;
                 $this->plugin->save ();
                 $event->setCancelled ();
                 $inv->onClose($player);
@@ -310,10 +314,11 @@ class EventListener implements Listener
             if ($this->plugin->pldb [strtolower($name)] ["상점생성"] == "온"){
               if ($this->plugin->pldb [strtolower($name)] ["상점정보"] == "구매"){
                 $item = $player->getInventory()->getItemInHand();
-                $nbt = $item->jsonSerialize ();
-                $item->setCount(1);
-                $this->plugin->shopdb ["구매"] ["농작물상점"] [$item->getName ()] ["아이템"] = $nbt;
-                $this->plugin->shopdb ["구매"] ["농작물상점"] [$item->getName ()] ["가격"] = 0;
+                $itemname = $item->getName ();
+                $this->plugin->shopdb ["구매"] ["농작물상점"] [$itemname] ['id'] = $item->getId();
+                $this->plugin->shopdb ["구매"] ["농작물상점"] [$itemname] ['dmg'] = $item->getDamage();
+                $this->plugin->shopdb ["구매"] ["농작물상점"] [$itemname] ['nbt'] = $item->hasCompoundTag() ? base64_encode($item->getCompoundTag()) : '';
+                $this->plugin->shopdb ["구매"] ["농작물상점"] [$itemname] ["가격"] = 0;
                 $this->plugin->save ();
                 $event->setCancelled ();
                 $inv->onClose($player);
@@ -321,10 +326,11 @@ class EventListener implements Listener
               }
               if ($this->plugin->pldb [strtolower($name)] ["상점정보"] == "판매"){
                 $item = $player->getInventory()->getItemInHand();
-                $nbt = $item->jsonSerialize ();
-                $item->setCount(1);
-                $this->plugin->shopdb ["판매"] ["농작물상점"] [$item->getName ()] ["아이템"] = $nbt;
-                $this->plugin->shopdb ["판매"] ["농작물상점"] [$item->getName ()] ["가격"] = 0;
+                $itemname = $item->getName ();
+                $this->plugin->shopdb ["판매"] ["농작물상점"] [$itemname] ['id'] = $item->getId();
+                $this->plugin->shopdb ["판매"] ["농작물상점"] [$itemname] ['dmg'] = $item->getDamage();
+                $this->plugin->shopdb ["판매"] ["농작물상점"] [$itemname] ['nbt'] = $item->hasCompoundTag() ? base64_encode($item->getCompoundTag()) : '';
+                $this->plugin->shopdb ["판매"] ["농작물상점"] [$itemname] ["가격"] = 0;
                 $this->plugin->save ();
                 $event->setCancelled ();
                 $inv->onClose($player);
@@ -376,10 +382,11 @@ class EventListener implements Listener
             if ($this->plugin->pldb [strtolower($name)] ["상점생성"] == "온"){
               if ($this->plugin->pldb [strtolower($name)] ["상점정보"] == "구매"){
                 $item = $player->getInventory()->getItemInHand();
-                $nbt = $item->jsonSerialize ();
-                $item->setCount(1);
-                $this->plugin->shopdb ["구매"] ["기타상점"] [$item->getName ()] ["아이템"] = $nbt;
-                $this->plugin->shopdb ["구매"] ["기타상점"] [$item->getName ()] ["가격"] = 0;
+                $itemname = $item->getName ();
+                $this->plugin->shopdb ["구매"] ["기타상점"] [$itemname] ['id'] = $item->getId();
+                $this->plugin->shopdb ["구매"] ["기타상점"] [$itemname] ['dmg'] = $item->getDamage();
+                $this->plugin->shopdb ["구매"] ["기타상점"] [$itemname] ['nbt'] = $item->hasCompoundTag() ? base64_encode($item->getCompoundTag()) : '';
+                $this->plugin->shopdb ["구매"] ["기타상점"] [$itemname] ["가격"] = 0;
                 $this->plugin->save ();
                 $event->setCancelled ();
                 $inv->onClose($player);
@@ -387,10 +394,11 @@ class EventListener implements Listener
               }
               if ($this->plugin->pldb [strtolower($name)] ["상점정보"] == "판매"){
                 $item = $player->getInventory()->getItemInHand();
-                $nbt = $item->jsonSerialize ();
-                $item->setCount(1);
-                $this->plugin->shopdb ["판매"] ["기타상점"] [$item->getName ()] ["아이템"] = $nbt;
-                $this->plugin->shopdb ["판매"] ["기타상점"] [$item->getName ()] ["가격"] = 0;
+                $itemname = $item->getName ();
+                $this->plugin->shopdb ["판매"] ["기타상점"] [$itemname] ['id'] = $item->getId();
+                $this->plugin->shopdb ["판매"] ["기타상점"] [$itemname] ['dmg'] = $item->getDamage();
+                $this->plugin->shopdb ["판매"] ["기타상점"] [$itemname] ['nbt'] = $item->hasCompoundTag() ? base64_encode($item->getCompoundTag()) : '';
+                $this->plugin->shopdb ["판매"] ["기타상점"] [$itemname] ["가격"] = 0;
                 $this->plugin->save ();
                 $event->setCancelled ();
                 $inv->onClose($player);
@@ -428,14 +436,19 @@ class EventListener implements Listener
           if ($this->plugin->pldb [strtolower($name)] ["상점정보"] == "구매"){
             if (isset($this->plugin->shopdb ["구매"] [$message])) {
               foreach($this->plugin->shopdb ["구매"] [$message] as $NPCShop => $v){
-                $itme = $this->plugin->shopdb ["구매"] [$message] [$NPCShop] ["아이템"];
-                $shopitem = Item::jsonDeserialize ($itme);
-                $shopitemid = $shopitem->getId ();
-                $shopitemDamage = $shopitem->getDamage ();
+                $item = Item::jsonDeserialize([
+                  'id' => $this->plugin->shopdb ["구매"] ["기타상점"] [$NPCShop] ['id'],
+                  'damage' => $this->plugin->shopdb ["구매"] ["기타상점"] [$NPCShop] ['dmg'],
+                  'count' => (int) $this->plugin->shopdb ["구매"] ["기타상점"] [$NPCShop] ["갯수"],
+                  'nbt' => base64_decode($this->plugin->shopdb ["구매"] ["기타상점"] [$NPCShop] ['nbt'], true)
+                ]);
+                $shopitemid = $item->getId ();
+                $shopitemDamage = $item->getDamage ();
                 if ($id == $shopitemid && $damage == $shopitemDamage) {
                   if ($this->plugin->pldb [strtolower($name)] ["상점수정"] == "온"){
                     $event->setCancelled ();
                     $inv->onClose ($player);
+                    $this->plugin->pldb [strtolower($name)] ["상점이름"] = $message;
                     $this->plugin->pldb [strtolower($name)] ["상점물품"] = $NPCShop;
                     $this->plugin->save ();
                     $this->ItemNew ($player);
@@ -443,6 +456,7 @@ class EventListener implements Listener
                   }
                   $event->setCancelled ();
                   $inv->onClose ($player);
+                  $this->plugin->pldb [strtolower($name)] ["상점이름"] = $message;
                   $this->plugin->pldb [strtolower($name)] ["상점물품"] = $NPCShop;
                   $this->plugin->save ();
                 }
@@ -454,14 +468,19 @@ class EventListener implements Listener
           if ($this->plugin->pldb [strtolower($name)] ["상점정보"] == "판매"){
             if (isset($this->plugin->shopdb ["판매"] [$message])) {
               foreach($this->plugin->shopdb ["판매"] [$message] as $NPCShop => $v){
-                $itme = $this->plugin->shopdb ["판매"] [$message] [$NPCShop] ["아이템"];
-                $shopitem = Item::jsonDeserialize ($itme);
-                $shopitemid = $shopitem->getId ();
-                $shopitemDamage = $shopitem->getDamage ();
+                $item = Item::jsonDeserialize([
+                  'id' => $this->plugin->shopdb ["구매"] ["기타상점"] [$NPCShop] ['id'],
+                  'damage' => $this->plugin->shopdb ["구매"] ["기타상점"] [$NPCShop] ['dmg'],
+                  'count' => (int) $this->plugin->shopdb ["구매"] ["기타상점"] [$NPCShop] ["갯수"],
+                  'nbt' => base64_decode($this->plugin->shopdb ["구매"] ["기타상점"] [$NPCShop] ['nbt'], true)
+                ]);
+                $shopitemid = $item->getId ();
+                $shopitemDamage = $item->getDamage ();
                 if ($id == $shopitemid && $damage == $shopitemDamage) {
                   if ($this->plugin->pldb [strtolower($name)] ["상점수정"] == "온"){
                     $event->setCancelled ();
                     $inv->onClose ($player);
+                    $this->plugin->pldb [strtolower($name)] ["상점이름"] = $message;
                     $this->plugin->pldb [strtolower($name)] ["상점물품"] = $NPCShop;
                     $this->plugin->save ();
                     $this->ItemNew ($player);
@@ -469,6 +488,7 @@ class EventListener implements Listener
                   }
                   $event->setCancelled ();
                   $inv->onClose ($player);
+                  $this->plugin->pldb [strtolower($name)] ["상점이름"] = $message;
                   $this->plugin->pldb [strtolower($name)] ["상점물품"] = $NPCShop;
                   $this->plugin->save ();
                 }
@@ -563,19 +583,37 @@ class EventListener implements Listener
         }
         if ($this->plugin->pldb [strtolower($name)] ["상점정보"] == "구매"){
           $player->sendMessage( $tag . '수정완료.');
-          $item = $this->plugin->pldb [strtolower($name)] ["상점물품"];
-          $nbt = $item->jsonSerialize ();
-          $item->setCount(1);
-          $this->plugin->shopdb ["구매"] [(string)$nbt] ["가격"] = $data[2];
+          $itemname = $this->plugin->pldb [strtolower($name)] ["상점물품"];
+          $itemxyz = $this->plugin->pldb [strtolower($name)] ["상점이름"];
+          $item = Item::jsonDeserialize([
+            'id' => $this->plugin->shopdb ["구매"] [$itemxyz] [$itemname] ['id'],
+            'damage' => $this->plugin->shopdb ["구매"] [$itemxyz] [$itemname] ['dmg'],
+            'count' => (int) 1,
+            'nbt' => base64_decode($this->plugin->shopdb ["구매"] [$itemxyz] [$itemname] ['nbt'], true)
+          ]);
+
+          $this->plugin->shopdb ["구매"] [$itemxyz] [$itemname] ['id'] = $item->getId();
+          $this->plugin->shopdb ["구매"] [$itemxyz] [$itemname] ['dmg'] = $item->getDamage();
+          $this->plugin->shopdb ["구매"] [$itemxyz] [$itemname] ['nbt'] = $item->hasCompoundTag() ? base64_encode($item->getCompoundTag()) : '';
+          $this->plugin->shopdb ["구매"] [$itemxyz] [$itemname] ["가격"] = $data[2];
           $this->plugin->save ();
           return true;
         }
         if ($this->plugin->pldb [strtolower($name)] ["상점정보"] == "판매"){
           $player->sendMessage( $tag . '수정완료.');
-          $item = $this->plugin->pldb [strtolower($name)] ["상점물품"];
-          $nbt = $item->jsonSerialize ();
-          $item->setCount(1);
-          $this->plugin->shopdb ["판매"] [(string)$nbt] ["가격"] = $data[2];
+          $itemname = $this->plugin->pldb [strtolower($name)] ["상점물품"];
+          $itemxyz = $this->plugin->pldb [strtolower($name)] ["상점이름"];
+          $item = Item::jsonDeserialize([
+            'id' => $this->plugin->shopdb ["판매"] [$itemxyz] [$itemname] ['id'],
+            'damage' => $this->plugin->shopdb ["판매"] [$itemxyz] [$itemname] ['dmg'],
+            'count' => (int) 1,
+            'nbt' => base64_decode($this->plugin->shopdb ["판매"] [$itemxyz] [$itemname] ['nbt'], true)
+          ]);
+
+          $this->plugin->shopdb ["판매"] [$itemxyz] [$itemname] ['id'] = $item->getId();
+          $this->plugin->shopdb ["판매"] [$itemxyz] [$itemname] ['dmg'] = $item->getDamage();
+          $this->plugin->shopdb ["판매"] [$itemxyz] [$itemname] ['nbt'] = $item->hasCompoundTag() ? base64_encode($item->getCompoundTag()) : '';
+          $this->plugin->shopdb ["판매"] [$itemxyz] [$itemname] ["가격"] = $data[2];
           $this->plugin->save ();
           return true;
         }
@@ -624,8 +662,12 @@ class EventListener implements Listener
             return true;
           }
           $count = $this->plugin->pldb [strtolower($name)] ["상점갯수"];
-          $item = Item::jsonDeserialize ($shopname);
-          $item->setCount((int)$count);
+          $item = Item::jsonDeserialize([
+            'id' => $this->plugin->shopdb ["구매"] [$shopname] [$shoppos] ['id'],
+            'damage' => $this->plugin->shopdb ["구매"] [$shopname] [$shoppos] ['dmg'],
+            'count' => (int) $count,
+            'nbt' => base64_decode($this->plugin->shopdb ["구매"] [$shopname] [$shoppos] ['nbt'], true)
+          ]);
           $moneys = (int)$coin*(int)$count;
           if ($player->getInventory()->canAddItem($item)) {
             if (ShopMoneyAPI::getInstance ()->getMoney ($player) >= $money*$count){
@@ -686,8 +728,12 @@ class EventListener implements Listener
             return true;
           }
           $count = $this->plugin->pldb [strtolower($name)] ["상점갯수"];
-          $item = Item::jsonDeserialize ($shopname);
-          $item->setCount((int)$count);
+          $item = Item::jsonDeserialize([
+            'id' => $this->plugin->shopdb ["판매"] [$shopname] [$shoppos] ['id'],
+            'damage' => $this->plugin->shopdb ["판매"] [$shopname] [$shoppos] ['dmg'],
+            'count' => (int) $count,
+            'nbt' => base64_decode($this->plugin->shopdb ["판매"] [$shopname] [$shoppos] ['nbt'], true)
+          ]);
           $moneys = (int)$money*(int)$count;
           if ($player->getInventory ()->contains ( $item )) {
             $player->sendMessage ($tag . "정상적으로 물품을 판매했습니다.\n판매하고 얻은 코인 : {$moneys}");
@@ -721,18 +767,21 @@ class EventListener implements Listener
           $this->plugin->save ();
         }
       }
-    }elseif($packet instanceof InventoryTransactionPacket and $packet->transactionType === InventoryTransactionPacket::TYPE_USE_ITEM_ON_ENTITY){
-      $entity = $player->getLevel()->getEntity($packet->trData->entityRuntimeId);
-      if($entity instanceof NPCEntity){
-        $this->plugin->pldb [strtolower($name)] ["상점정보"] = "없음";
-        $this->plugin->pldb [strtolower($name)] ["상점물품"] = "없음";
-        $this->plugin->pldb [strtolower($name)] ["상점갯수"] = 0;
-        $this->plugin->pldb [strtolower($name)] ["상점이용"] = "온";
-        $this->plugin->pldb [strtolower($name)] ["상점이름"] = "없음";
-        $this->plugin->pldb [strtolower($name)] ["상점수정"] = "오프";
-        $this->plugin->pldb [strtolower($name)] ["상점생성"] = "오프";
-        $this->plugin->save ();
-        $this->plugin->onOpen ($player);
+    } else if($packet instanceof InventoryTransactionPacket){
+      $trData = $packet->trData;
+      if($trData instanceof UseItemOnEntityTransactionData){
+        $entity = $player->level->getEntity($trData->getEntityRuntimeId());
+        if($entity instanceof NPCEntity){
+          $this->plugin->pldb [strtolower($name)] ["상점정보"] = "없음";
+          $this->plugin->pldb [strtolower($name)] ["상점물품"] = "없음";
+          $this->plugin->pldb [strtolower($name)] ["상점갯수"] = 0;
+          $this->plugin->pldb [strtolower($name)] ["상점이용"] = "온";
+          $this->plugin->pldb [strtolower($name)] ["상점이름"] = "없음";
+          $this->plugin->pldb [strtolower($name)] ["상점수정"] = "오프";
+          $this->plugin->pldb [strtolower($name)] ["상점생성"] = "오프";
+          $this->plugin->save ();
+          $this->plugin->onOpen ($player);
+        }
       }
     }
   }
