@@ -55,6 +55,7 @@ class EventListener implements Listener
       $this->plugin->save ();
     }
   }
+  
   public function onPacketReceive (DataPacketReceiveEvent $event) {
     $packet = $event->getPacket();
     if(! $packet instanceof ContainerClosePacket)
@@ -65,6 +66,13 @@ class EventListener implements Listener
       $pk = new ContainerClosePacket();
       $pk->windowId = $player->getWindowId($inv);
       $player->sendDataPacket($pk);
+      return true;
+    }
+    if ($inv instanceof ShopChestInventory) {
+      $pk = new ContainerClosePacket();
+      $pk->windowId = $player->getWindowId($inv);
+      $player->sendDataPacket($pk);
+      return true;
     }
   }
   public function onInvClose(InventoryCloseEvent $event) {
@@ -79,6 +87,7 @@ class EventListener implements Listener
       return true;
     }
   }
+  
   public function onTransaction(InventoryTransactionEvent $event) {
     $transaction = $event->getTransaction();
     $player = $transaction->getSource ();
@@ -771,7 +780,7 @@ class EventListener implements Listener
       $trData = $packet->trData;
       if($trData instanceof UseItemOnEntityTransactionData){
         $entity = $player->level->getEntity($trData->getEntityRuntimeId());
-        if($entity instanceof NPCEntity){
+        if($entity->getNameTag () == "상점도우미"){
           $this->plugin->pldb [strtolower($name)] ["상점정보"] = "없음";
           $this->plugin->pldb [strtolower($name)] ["상점물품"] = "없음";
           $this->plugin->pldb [strtolower($name)] ["상점갯수"] = 0;
