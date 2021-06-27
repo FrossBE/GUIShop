@@ -16,7 +16,7 @@ use pocketmine\network\mcpe\protocol\UpdateBlockPacket;
 use pocketmine\Player;
 use pocketmine\tile\Spawnable;
 
-class ShopChestInventory extends InventoryBase{
+class shopChestInventory extends InventoryBase{
 
 	/** @var Vector3|null */
 	protected $vector = null;
@@ -29,7 +29,7 @@ class ShopChestInventory extends InventoryBase{
 	}
 
 	public function getName() : string{
-		return "ShopChestInventory";
+		return "shopChestInventory";
 	}
 
 	public function getDefaultSize() : int{
