@@ -37,17 +37,17 @@ class GUIShop extends PluginBase
   public $db;
   public $get = [];
   private static $instance = null;
-
+  
   public static function getInstance(): GUIShop
   {
     return static::$instance;
   }
-
+  
   public function onLoad()
   {
     self::$instance = $this;
   }
-
+  
   public function onEnable()
   {
     $this->player = new Config ($this->getDataFolder() . "players.yml", Config::YAML);
@@ -332,7 +332,7 @@ class GUIShop extends PluginBase
       }
     }, 10);
   }
-
+  
   public function ShopItemsSet($player) {
     $name = $player->getName ();
     $name = $player->getName ();
@@ -376,7 +376,7 @@ class GUIShop extends PluginBase
       }
     }, 10);
   }
-
+  
   public function ShopItemPosSet($player) {
     $name = $player->getName ();
     $name = $player->getName ();
@@ -420,7 +420,7 @@ class GUIShop extends PluginBase
       }
     }, 10);
   }
-
+  
   public function onDisable()
   {
     $this->save();
