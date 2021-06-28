@@ -33,9 +33,9 @@ use pocketmine\network\mcpe\protocol\types\inventory\UseItemOnEntityTransactionD
 
 class EventListener implements Listener
 {
-  
+
   protected $plugin;
-  
+
   public function __construct(GUIShop $plugin)
   {
     $this->plugin = $plugin;
@@ -600,7 +600,7 @@ class EventListener implements Listener
             'count' => (int) 1,
             'nbt' => base64_decode($this->plugin->shopdb ["구매"] [$itemxyz] [$itemname] ['nbt'], true)
           ]);
-          
+
           $this->plugin->shopdb ["구매"] [$itemxyz] [$itemname] ['id'] = $item->getId();
           $this->plugin->shopdb ["구매"] [$itemxyz] [$itemname] ['dmg'] = $item->getDamage();
           $this->plugin->shopdb ["구매"] [$itemxyz] [$itemname] ['nbt'] = $item->hasCompoundTag() ? base64_encode($item->getCompoundTag()) : '';
@@ -618,7 +618,7 @@ class EventListener implements Listener
             'count' => (int) 1,
             'nbt' => base64_decode($this->plugin->shopdb ["판매"] [$itemxyz] [$itemname] ['nbt'], true)
           ]);
-          
+
           $this->plugin->shopdb ["판매"] [$itemxyz] [$itemname] ['id'] = $item->getId();
           $this->plugin->shopdb ["판매"] [$itemxyz] [$itemname] ['dmg'] = $item->getDamage();
           $this->plugin->shopdb ["판매"] [$itemxyz] [$itemname] ['nbt'] = $item->hasCompoundTag() ? base64_encode($item->getCompoundTag()) : '';
@@ -869,13 +869,13 @@ class EventListener implements Listener
   public function onHit(EntityDamageEvent $event)
   {
     $entity = $event->getEntity();
-    if($entity->getNameTag () == "상점도우미"){
+    if ($entity instanceof NPCEntity) {
       $event->setCancelled(true);
     }
   }
   public function onDeath(EntityDeathEvent $event){
     $npc = $event->getEntity();
-    if($entity->getNameTag () == "상점도우미"){
+    if($npc instanceof NPCEntity){
       $event->setDrops([]);
     }
   }
