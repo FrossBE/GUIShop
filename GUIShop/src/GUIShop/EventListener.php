@@ -446,10 +446,10 @@ class EventListener implements Listener
             if (isset($this->plugin->shopdb ["구매"] [$message])) {
               foreach($this->plugin->shopdb ["구매"] [$message] as $NPCShop => $v){
                 $item = Item::jsonDeserialize([
-                  'id' => $this->plugin->shopdb ["구매"] ["기타상점"] [$NPCShop] ['id'],
-                  'damage' => $this->plugin->shopdb ["구매"] ["기타상점"] [$NPCShop] ['dmg'],
-                  'count' => (int) $this->plugin->shopdb ["구매"] ["기타상점"] [$NPCShop] ["갯수"],
-                  'nbt' => base64_decode($this->plugin->shopdb ["구매"] ["기타상점"] [$NPCShop] ['nbt'], true)
+                  'id' => $this->plugin->shopdb ["구매"] [$message] [$NPCShop] ['id'],
+                  'damage' => $this->plugin->shopdb ["구매"] [$message] [$NPCShop] ['dmg'],
+                  'count' => (int) $this->plugin->shopdb ["구매"] [$message] [$NPCShop] ["갯수"],
+                  'nbt' => base64_decode($this->plugin->shopdb ["구매"] [$message] [$NPCShop] ['nbt'], true)
                 ]);
                 $shopitemid = $item->getId ();
                 $shopitemDamage = $item->getDamage ();
@@ -478,10 +478,10 @@ class EventListener implements Listener
             if (isset($this->plugin->shopdb ["판매"] [$message])) {
               foreach($this->plugin->shopdb ["판매"] [$message] as $NPCShop => $v){
                 $item = Item::jsonDeserialize([
-                  'id' => $this->plugin->shopdb ["구매"] ["기타상점"] [$NPCShop] ['id'],
-                  'damage' => $this->plugin->shopdb ["구매"] ["기타상점"] [$NPCShop] ['dmg'],
-                  'count' => (int) $this->plugin->shopdb ["구매"] ["기타상점"] [$NPCShop] ["갯수"],
-                  'nbt' => base64_decode($this->plugin->shopdb ["구매"] ["기타상점"] [$NPCShop] ['nbt'], true)
+                  'id' => $this->plugin->shopdb ["구매"] [$message] [$NPCShop] ['id'],
+                  'damage' => $this->plugin->shopdb ["구매"] [$message] [$NPCShop] ['dmg'],
+                  'count' => (int) $this->plugin->shopdb ["구매"] [$message] [$NPCShop] ["갯수"],
+                  'nbt' => base64_decode($this->plugin->shopdb ["구매"] [$message] [$NPCShop] ['nbt'], true)
                 ]);
                 $shopitemid = $item->getId ();
                 $shopitemDamage = $item->getDamage ();
