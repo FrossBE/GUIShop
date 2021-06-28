@@ -20,7 +20,7 @@ use pocketmine\tile\Chest;
 use GUIShop\entity\NPCEntity;
 use pocketmine\entity\Entity;
 use pocketmine\entity\Human;
-use CoinAPI\CoinAPI;
+use ShopMoneyAPI\ShopMoneyAPI;
 // monster
 use pocketmine\level\Position;
 use pocketmine\nbt\tag\CompoundTag;
