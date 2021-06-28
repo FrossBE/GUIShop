@@ -17,35 +17,35 @@ use pocketmine\Player;
 use pocketmine\tile\Spawnable;
 
 class ShopChestInventory extends InventoryBase{
-
+	
 	/** @var Vector3|null */
 	protected $vector = null;
-
+	
 	protected $invName;
-
+	
 	public function __construct(string $invName){
 		parent::__construct([], 27);
 		$this->invName = $invName;
 	}
-
+	
 	public function getName() : string{
 		return "ShopChestInventory";
 	}
-
+	
 	public function getDefaultSize() : int{
 		return 27;
 	}
-
+	
 	public function onOpen(Player $who) : void{
 		BaseInventory::onOpen($who);
 		$this->handleOpen($who);
-
+		
 		$this->vector = $who->add(0, 5)->floor();
-
+		
 		$x = $this->vector->x;
 		$y = $this->vector->y;
 		$z = $this->vector->z;
-
+		
 		$pk = new UpdateBlockPacket();
 		$pk->x = $x;
 		$pk->y = $y;
@@ -53,7 +53,7 @@ class ShopChestInventory extends InventoryBase{
 		$pk->blockRuntimeId = RuntimeBlockMapping::toStaticRuntimeId(BlockIds::CHEST);
 		$pk->flags = UpdateBlockPacket::FLAG_ALL_PRIORITY;
 		$who->sendDataPacket($pk);
-
+		
 		$pk = new BlockActorDataPacket();
 		$pk->x = $x;
 		$pk->y = $y;
@@ -66,26 +66,27 @@ class ShopChestInventory extends InventoryBase{
 			new StringTag("CustomName", $this->invName)
 		]));
 		$who->sendDataPacket($pk);
-
+		
 		$pk = new ContainerOpenPacket();
 		$pk->x = $x;
 		$pk->y = $y;
 		$pk->z = $z;
+		$pk->type = 0;
 		$pk->windowId = $who->getWindowId($this);
 		$who->sendDataPacket($pk);
-
+		
 		$this->sendContents($who);
 	}
 	public function onClose(Player $who) : void{
 		BaseInventory::onClose($who);
 		$this->handleClose($who);
-
+		
 		$x = $this->vector->x;
 		$y = $this->vector->y;
 		$z = $this->vector->z;
-
+		
 		$block = $who->getLevel()->getBlock($this->vector);
-
+		
 		$pk = new UpdateBlockPacket();
 		$pk->x = $x;
 		$pk->y = $y;
@@ -93,7 +94,7 @@ class ShopChestInventory extends InventoryBase{
 		$pk->blockRuntimeId = RuntimeBlockMapping::toStaticRuntimeId($block->getId(), $block->getDamage()); // TODO: change this to $block->getRuntimeId();
 		$pk->flags = UpdateBlockPacket::FLAG_ALL_PRIORITY;
 		$who->sendDataPacket($pk);
-
+		
 		/** @var Spawnable $tile */
 		if(($tile = $who->getLevel()->getBlock($this->vector)) instanceof Spawnable){
 			$who->sendDataPacket($tile->createSpawnPacket());
