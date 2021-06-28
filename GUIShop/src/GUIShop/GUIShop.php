@@ -20,7 +20,7 @@ use pocketmine\tile\Chest;
 use GUIShop\entity\NPCEntity;
 use pocketmine\entity\Entity;
 use pocketmine\entity\Human;
-use ShopMoneyAPI\ShopMoneyAPI;
+use CoinAPI\CoinAPI;
 // monster
 use pocketmine\level\Position;
 use pocketmine\nbt\tag\CompoundTag;
@@ -273,7 +273,7 @@ class GUIShop extends PluginBase
     $inv = new DoubleChestInventory("§6§l[ §f상점 §6]");
     $arr = [];
     $i = 0;
-    if (isset($this->shopdb ["구매"])){
+    if (isset($this->shopdb ["구매"] [$message])){
       foreach($this->shopdb ["구매"] [$message] as $NPCShop => $v){
         $money = $this->shopdb ["구매"] [$message] [$NPCShop] ["가격"];
         $item = Item::jsonDeserialize([
@@ -305,7 +305,7 @@ class GUIShop extends PluginBase
     $inv = new DoubleChestInventory("§6§l[ §f상점 §6]");
     $arr = [];
     $i = 0;
-    if (isset($this->shopdb ["판매"])){
+    if (isset($this->shopdb ["판매"] [$message])){
       foreach($this->shopdb ["판매"] [$message] as $NPCShop => $v){
         $money = $this->shopdb ["판매"] [$message] [$NPCShop] ["가격"];
         $item = Item::jsonDeserialize([
